@@ -1,16 +1,25 @@
-# asuser
+# Flutter Affiliate Marketing App
 
-A new Flutter project.
+This app is still incomplete.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
+- Configure app for Android and Ios. Web is setup already, but replace config keys
+- Create an admin panel with 'add_product_page.dart' located in libs>screens
+- Add following value inside 'Products' Collection: 
+  1. String imgLink;
+  2. String title;
+  3. String description;
+  4. int mrp;
+  5.0int off;
+  6. String exp;
+  8. String store;
+  9. String category;
+  10. String destination;
+  11. String offerType;
+  12. String id;
+  13. int time;
+- Run the app with 'flutter run -d chrome'
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
