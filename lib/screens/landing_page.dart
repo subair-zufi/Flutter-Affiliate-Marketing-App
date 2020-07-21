@@ -28,7 +28,7 @@ class _LandingPageState extends State<LandingPage> {
         print(msg);
         return;
       });
-      fbm.subscribeToTopic('chat');
+      fbm.subscribeToTopic('user');
     }
   }
 

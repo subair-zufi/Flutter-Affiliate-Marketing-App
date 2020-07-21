@@ -17,7 +17,7 @@ class _AddProductPageState extends State<AddProductPage> {
   var _exp;
   var _store = 'Amazone';
   var _category = 'Mobiles';
-  var _subCat = 'Bags';
+  var _destination = 'Bags';
   var _offType = 'General';
 
   DateTime selectedDate = DateTime.now();
@@ -63,11 +63,10 @@ class _AddProductPageState extends State<AddProductPage> {
               off: _off,
               offerType: _offType,
               store: _store,
-              subCat: _subCat,
+              destination: _destination,
               time: DateTime.now().millisecondsSinceEpoch.toInt(),
               title: _title,
-            ).toMap())
-            .then((value) => Navigator.pop(context, 'Success'));
+            ).toMap());
       }
     }
 
@@ -142,10 +141,17 @@ class _AddProductPageState extends State<AddProductPage> {
                           },
                         ),
                         InputBox(
-                          icon: Icons.insert_link,
+                          icon: Icons.monetization_on,
                           labelText: 'Offer Price',
                           onSaved: (value) {
                             _off= int.parse(value);
+                          },
+                        ),
+                        InputBox(
+                          icon: Icons.insert_link,
+                          labelText: 'Destination',
+                          onSaved: (value) {
+                            _destination= value;
                           },
                         ),
                         Container(
@@ -221,30 +227,8 @@ class _AddProductPageState extends State<AddProductPage> {
                             }).toList(),
                           ),
                         ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          margin: EdgeInsets.only(right: 13, left: 13),
-                          padding: EdgeInsets.only(left: 13),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(13),
-                            color: Colors.black.withOpacity(.2),
-                          ),
-                          child: DropdownButton<String>(
-                            value: _subCat,
-                            onChanged: (String newValue) {
-                              setState(() {
-                                _subCat = newValue;
-                              });
-                            },
-                            items: <String>['Bags', 'Two', 'Free', 'Four']
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ),
+                        
+                        
                         Container(
                           width: MediaQuery.of(context).size.width,
                           margin: EdgeInsets.only(right: 13, left: 13),

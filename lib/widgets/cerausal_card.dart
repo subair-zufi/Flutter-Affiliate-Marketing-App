@@ -31,7 +31,28 @@ class CerousalCard extends StatelessWidget {
               )),
         ),
         Positioned(
-          child: Text(price),
+          bottom: 5,
+          left: 15,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                '₹$price',
+                style: TextStyle(
+                    color: Colors.black38,
+                    decoration: TextDecoration.lineThrough,
+                    ),
+              ),
+              SizedBox(
+                width: 8,
+              ),
+              Text(
+                '₹$offer',
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.green),
+              ),
+            ],
+          ),
         )
       ],
     );

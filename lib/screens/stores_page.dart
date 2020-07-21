@@ -60,18 +60,6 @@ class StoresPage extends StatelessWidget {
               ),
             );
           }),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return AddProductPage();
-                  },
-                  fullscreenDialog: true));
-        },
-      ),
     );
   }
 }

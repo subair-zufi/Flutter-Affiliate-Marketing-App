@@ -1,14 +1,17 @@
+import 'package:asuser/apis/providers.dart/product_provider.dart';
+import 'package:asuser/models/product.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:asuser/widgets/product_card.dart';
+import 'package:provider/provider.dart';
 
 class AllProductsPage extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    var productRef = Firestore.instance.collection('Products');
-    
+    var productProvider = Provider.of<ProductProvider>(context);
+    List<Product> productList;
 
     return Scaffold(
       body: Container(
@@ -17,9 +20,14 @@ class AllProductsPage extends StatelessWidget {
             shrinkWrap: true,
             children: [
               StreamBuilder<QuerySnapshot>(
-                  stream: productRef.orderBy('time').snapshots(),
+                  stream: productProvider.fetchProductsAsStream(),
                   builder: (BuildContext context, snapshot) {
                     if (snapshot.hasData) {
+                      productList = snapshot.data.documents
+                          .map(
+                            (doc) => Product.fromMap(doc.data),
+                          )
+                          .toList();
                       if (snapshot.hasError)
                         return new Text('Error: ${snapshot.error}');
                       switch (snapshot.connectionState) {
@@ -33,17 +41,11 @@ class AllProductsPage extends StatelessWidget {
                           print(titleList);
 
                           return Wrap(
-                            children: snapshot.data.documents
-                                .map((DocumentSnapshot document) {
-                              return ProductCard(
-                                imgLink: document['imgLink'] ?? 'no',
-                                offer: document['off'].toString() ?? 'no',
-                                price: document['mrp'].toString() ?? 'no',
-                                title: document['title'] ?? 'no',
-                                validity: document['exp'] ?? 'no',
-                                id: document['id'],
-                              );
-                            }).toList(),
+                            children:
+                                  productList.map((e) => ProductCard(
+                                    product: e,
+                                  )).toList()
+
                           );
                       }
                     }

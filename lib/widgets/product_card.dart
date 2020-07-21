@@ -1,21 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import 'package:asuser/models/product.dart';
+import 'package:asuser/screens/product_details_page.dart';
+
 class ProductCard extends StatelessWidget {
-  final String id;
-  final String imgLink;
-  final String title;
-  final String price;
-  final String offer;
-  final String validity;
+  final Product product;
 
   const ProductCard({
     Key key,
-    this.id,
-    this.imgLink,
-    this.title,
-    this.price,
-    this.offer,
-    this.validity,
+    this.product,
   }) : super(key: key);
 
   @override
@@ -26,7 +20,14 @@ class ProductCard extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         borderRadius: BorderRadius.circular(20),
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (BuildContext context) {
+            return ProductDetailsPage(
+              id: product.id,
+            );
+          }));
+        },
         child: Container(
           width: myWidth,
           decoration: BoxDecoration(
@@ -43,7 +44,7 @@ class ProductCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Image.network(
-                    imgLink,
+                    product.imgLink,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -58,7 +59,7 @@ class ProductCard extends StatelessWidget {
                   Container(
                     width: 200,
                     child: Text(
-                      title,
+                      product.title,
                       textAlign: TextAlign.left,
                       maxLines: 3,
                       style: Theme.of(context)
@@ -74,9 +75,9 @@ class ProductCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        '₹$price',
+                        '₹${product.mrp}',
                         style: TextStyle(
-                          color: Colors.black26,
+                          color: Colors.black38,
                           decoration: TextDecoration.lineThrough,
                         ),
                       ),
@@ -84,7 +85,7 @@ class ProductCard extends StatelessWidget {
                         width: 8,
                       ),
                       Text(
-                        '₹$offer',
+                        '₹${product.off}',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.green),
                       ),
@@ -98,7 +99,7 @@ class ProductCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Validity ${validity.substring(0, 10)}',
+                        'Validity ${product.exp.substring(0, 10)}',
                         style: TextStyle(color: Colors.black26, fontSize: 12),
                       ),
 

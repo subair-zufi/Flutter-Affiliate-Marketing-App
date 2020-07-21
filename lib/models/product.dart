@@ -7,7 +7,7 @@ class Product {
   String exp;
   String store;
   String category;
-  String subCat;
+  String destination;
   String offerType;
   String id;
   int time;
@@ -20,11 +20,13 @@ class Product {
     this.exp,
     this.store,
     this.category,
-    this.subCat,
+    this.destination,
     this.offerType,
     this.id,
     this.time,
   });
+
+  
 
   Map<String, dynamic> toMap() {
     return {
@@ -36,7 +38,7 @@ class Product {
       'exp': exp,
       'store': store,
       'category': category,
-      'subCat': subCat,
+      'destination': destination,
       'offerType': offerType,
       'id': id,
       'time': time,
@@ -52,7 +54,7 @@ class Product {
         exp = map['exp'],
         store = map['store'],
         category = map['category'],
-        subCat = map['subCat'],
+        destination = map['destination'],
         offerType = map['offerType'],
         id = map['id'],
         time = map['time'];
